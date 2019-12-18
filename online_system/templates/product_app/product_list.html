@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  </head>
+  <body>
+<div class="col-md-8">
+  <h3>Products Details:- </h3><br>
+  <table id="userTable" class="table table-striped">
+    <tr>
+      <th>user name</th>
+      <th>Name</th>
+      <th>Description</th>
+      <th colspan="3">Price</th>
+    </tr>
+    {% for obj in product_list %}
+    <tr id="user-{{obj.id}}">
+        <<td>{{obj.user}}</td>
+        <td class="userName userData" name="name">{{obj.name}}</td>
+        <td class="userDescription userData" name="address">{{obj.description}}</td>
+        <td class="userPrice userData" name="age">{{obj.price}}</td>
+        <td align="center">
+          {% if request.user.role == "customer" %}
+          <td>  <form action="{% url 'charge' order_pk=obj.id %}" method="post">
+                  {% csrf_token %}
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="{{ key }}"
+                    data-description="A Django Charge"
+                    data-amount="{{obj.price}}"
+                    data-locale="auto">
+
+            </script> </form> </td>
+  {% endif %}
+    </tr>
+    {% endfor %}
+</body>
+</html>

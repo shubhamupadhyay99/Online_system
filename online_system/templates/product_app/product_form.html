@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  </head>
+  <body>
+    {% if request.user.role == "admin" %}
+    <form method="post">
+      <h1>welcome {{user}}</h1>
+      <h1>Inert Details</h1>
+      {{form.as_p}}
+      {% csrf_token %}
+
+      <input type="submit" class="btn btn-lg btn-primary" value="Insert/Update Details">
+    </form>
+    {% endif %}
+
+    <a class="btn btn-lg btn-warning" href="/accounts/logout"> logout</a>
+         {% if request.user.role == "admin" %}
+    <a class="btn btn-lg btn-success" href="/userlist"> click to  manage products</a>
+               {% endif %}
+          {% if request.user.role == "customer" %}
+    <a class="btn btn-lg btn-success" href="/customerlist"> click to purchase products</a>
+    {% endif %}
+
+  </body>
+</html>

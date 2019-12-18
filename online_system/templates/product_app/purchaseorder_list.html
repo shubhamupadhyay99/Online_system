@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h3>Purchased Products Details:- </h3><br>
+    <table border="1">
+      <tr>
+        <th>User</th>
+        <th>Product</th>
+        <th>price</th>
+      </tr>
+      {% for obj in purchaseorder_list %}
+      <tr>
+        <td>{{obj.user}}</td>
+        <td>{{obj.product.name}}</td>
+        <td>{{obj.product.price}}</td>
+        <td>{{obj.product.buying_date}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
